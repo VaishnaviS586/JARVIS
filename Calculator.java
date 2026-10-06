@@ -7,71 +7,40 @@ public class Calculator {
 
     private JFrame frame;
 
-    // Display components
     private JLabel expressionLabel;
     private JTextField display;
 
-    // Calculation variables
     private double firstNumber = 0;
     private String operator = "";
     private boolean newNumber = true;
 
-    // =====================================================
+    // Stores the last calculated answer
+    private double lastAnswer = 0;
+
     // JARVIS COLORS
-    // =====================================================
+    private final Color BACKGROUND = new Color(8, 15, 25);
+    private final Color PANEL = new Color(15, 28, 45);
+    private final Color DISPLAY = new Color(5, 12, 20);
+    private final Color BUTTON = new Color(20, 38, 60);
+    private final Color CYAN = new Color(0, 220, 255);
+    private final Color LIGHT_CYAN = new Color(120, 240, 255);
+    private final Color WHITE = new Color(240, 245, 250);
+    private final Color GRAY = new Color(150, 165, 180);
+    private final Color GREEN = new Color(50, 220, 120);
 
-    private final Color BACKGROUND =
-            new Color(8, 15, 25);
-
-    private final Color PANEL =
-            new Color(15, 28, 45);
-
-    private final Color DISPLAY =
-            new Color(5, 12, 20);
-
-    private final Color BUTTON =
-            new Color(20, 38, 60);
-
-    private final Color CYAN =
-            new Color(0, 220, 255);
-
-    private final Color LIGHT_CYAN =
-            new Color(120, 240, 255);
-
-    private final Color WHITE =
-            new Color(240, 245, 250);
-
-    private final Color GRAY =
-            new Color(150, 165, 180);
-
-    private final Color GREEN =
-            new Color(50, 220, 120);
-
-
-    // =====================================================
     // CONSTRUCTOR
-    // =====================================================
-
     public Calculator() {
-
         createCalculator();
     }
 
-
-    // =====================================================
     // CREATE CALCULATOR
-    // =====================================================
-
     private void createCalculator() {
 
         frame = new JFrame(
                 "J.A.R.V.I.S. - Scientific Calculator"
         );
 
-        frame.setSize(
-                600,
-                700
-        );
+        frame.setSize(600, 700);
 
         frame.setDefaultCloseOperation(
                 JFrame.DISPOSE_ON_CLOSE
@@ -79,43 +48,29 @@ public class Calculator {
 
         frame.setLocationRelativeTo(null);
 
-        frame.setLayout(
-                new BorderLayout()
-        );
+        frame.setLayout(new BorderLayout());
 
         frame.getContentPane().setBackground(
                 BACKGROUND
         );
 
-
-        // =================================================
         // HEADER
-        // =================================================
-
-        JPanel header =
-                new JPanel(
-                        new BorderLayout()
-                );
-
-        header.setBackground(
-                BACKGROUND
+        JPanel header = new JPanel(
+                new BorderLayout()
         );
+
+        header.setBackground(BACKGROUND);
 
         header.setBorder(
                 BorderFactory.createEmptyBorder(
-                        15,
-                        20,
-                        10,
-                        20
+                        15, 20, 10, 20
                 )
         );
 
-
-        JLabel title =
-                new JLabel(
-                        "J.A.R.V.I.S. CALCULATOR",
-                        SwingConstants.CENTER
-                );
+        JLabel title = new JLabel(
+                "J.A.R.V.I.S. CALCULATOR",
+                SwingConstants.CENTER
+        );
 
         title.setFont(
                 new Font(
@@ -125,16 +80,12 @@ public class Calculator {
                 )
         );
 
-        title.setForeground(
-                CYAN
+        title.setForeground(CYAN);
+
+        JLabel status = new JLabel(
+                "● SCIENTIFIC CALCULATION SYSTEM ONLINE",
+                SwingConstants.CENTER
         );
-
-
-        JLabel status =
-                new JLabel(
-                        "● SCIENTIFIC CALCULATION SYSTEM ONLINE",
-                        SwingConstants.CENTER
-                );
 
         status.setFont(
                 new Font(
@@ -144,10 +95,7 @@ public class Calculator {
                 )
         );
 
-        status.setForeground(
-                GREEN
-        );
-
+        status.setForeground(GREEN);
 
         header.add(
                 title,
@@ -159,53 +107,41 @@ public class Calculator {
                 BorderLayout.SOUTH
         );
 
-
         frame.add(
                 header,
                 BorderLayout.NORTH
         );
 
-
-        // =================================================
-        // DISPLAY PANEL
-        // =================================================
-
-        JPanel displayPanel =
-                new JPanel(
-                        new BorderLayout()
-                );
-
-        displayPanel.setBackground(
-                DISPLAY
+        // MAIN CONTENT PANEL
+        JPanel mainPanel = new JPanel(
+                new BorderLayout()
         );
+
+        mainPanel.setBackground(BACKGROUND);
+
+        // DISPLAY PANEL
+        JPanel displayPanel = new JPanel(
+                new BorderLayout()
+        );
+
+        displayPanel.setBackground(DISPLAY);
 
         displayPanel.setBorder(
                 BorderFactory.createCompoundBorder(
-
                         BorderFactory.createLineBorder(
                                 CYAN,
                                 1
                         ),
-
                         BorderFactory.createEmptyBorder(
-                                8,
-                                15,
-                                8,
-                                15
+                                8, 15, 8, 15
                         )
                 )
         );
 
-
-        // =================================================
-        // EXPRESSION
-        // =================================================
-
-        expressionLabel =
-                new JLabel(
-                        " ",
-                        SwingConstants.RIGHT
-                );
+        expressionLabel = new JLabel(
+                " ",
+                SwingConstants.RIGHT
+        );
 
         expressionLabel.setFont(
                 new Font(
@@ -215,19 +151,9 @@ public class Calculator {
                 )
         );
 
-        expressionLabel.setForeground(
-                GRAY
-        );
+        expressionLabel.setForeground(GRAY);
 
-
-        // =================================================
-        // MAIN DISPLAY
-        // =================================================
-
-        display =
-                new JTextField(
-                        "0"
-                );
+        display = new JTextField("0");
 
         display.setFont(
                 new Font(
@@ -241,45 +167,25 @@ public class Calculator {
                 SwingConstants.RIGHT
         );
 
-        display.setForeground(
-                CYAN
-        );
+        display.setForeground(CYAN);
 
-        display.setBackground(
-                DISPLAY
-        );
+        display.setBackground(DISPLAY);
 
-        display.setCaretColor(
-                CYAN
-        );
+        display.setCaretColor(CYAN);
 
         display.setBorder(
                 BorderFactory.createEmptyBorder(
-                        2,
-                        2,
-                        2,
-                        2
+                        2, 2, 2, 2
                 )
         );
 
-        display.setEditable(
-                false
+        display.setEditable(false);
+
+        JPanel displayContainer = new JPanel(
+                new BorderLayout()
         );
 
-
-        // =================================================
-        // DISPLAY CONTAINER
-        // =================================================
-
-        JPanel displayContainer =
-                new JPanel(
-                        new BorderLayout()
-                );
-
-        displayContainer.setBackground(
-                DISPLAY
-        );
-
+        displayContainer.setBackground(DISPLAY);
 
         displayContainer.add(
                 expressionLabel,
@@ -291,62 +197,43 @@ public class Calculator {
                 BorderLayout.CENTER
         );
 
-
         displayPanel.add(
                 displayContainer,
                 BorderLayout.CENTER
         );
 
-
-        // =================================================
         // FIXED DISPLAY HEIGHT
-        // =================================================
-
         displayPanel.setPreferredSize(
                 new Dimension(
                         0,
-                        110
+                        120
                 )
         );
 
-
-        frame.add(
+        mainPanel.add(
                 displayPanel,
-                BorderLayout.CENTER
+                BorderLayout.NORTH
         );
 
-
-        // =================================================
         // BUTTON PANEL
-        // =================================================
-
-        JPanel buttonPanel =
-                new JPanel(
-                        new GridLayout(
-                                7,
-                                5,
-                                8,
-                                8
-                        )
-                );
-
-        buttonPanel.setBackground(
-                BACKGROUND
+        JPanel buttonPanel = new JPanel(
+                new GridLayout(
+                        7,
+                        5,
+                        8,
+                        8
+                )
         );
+
+        buttonPanel.setBackground(BACKGROUND);
 
         buttonPanel.setBorder(
                 BorderFactory.createEmptyBorder(
-                        10,
-                        20,
-                        20,
-                        20
+                        10, 20, 20, 20
                 )
         );
 
-
-        // =================================================
         // ROW 1
-        // =================================================
 
         addButton(
                 buttonPanel,
@@ -378,10 +265,7 @@ public class Calculator {
                 e -> setOperator("/")
         );
 
-
-        // =================================================
         // ROW 2
-        // =================================================
 
         addButton(
                 buttonPanel,
@@ -413,10 +297,7 @@ public class Calculator {
                 e -> setOperator("*")
         );
 
-
-        // =================================================
         // ROW 3
-        // =================================================
 
         addButton(
                 buttonPanel,
@@ -448,10 +329,7 @@ public class Calculator {
                 e -> setOperator("-")
         );
 
-
-        // =================================================
         // ROW 4
-        // =================================================
 
         addButton(
                 buttonPanel,
@@ -483,10 +361,7 @@ public class Calculator {
                 e -> setOperator("+")
         );
 
-
-        // =================================================
         // ROW 5
-        // =================================================
 
         addButton(
                 buttonPanel,
@@ -518,10 +393,7 @@ public class Calculator {
                 e -> calculate()
         );
 
-
-        // =================================================
         // ROW 6
-        // =================================================
 
         addButton(
                 buttonPanel,
@@ -553,10 +425,7 @@ public class Calculator {
                 e -> number(")")
         );
 
-
-        // =================================================
         // ROW 7
-        // =================================================
 
         addButton(
                 buttonPanel,
@@ -576,12 +445,11 @@ public class Calculator {
                 e -> number("00")
         );
 
+        // ANS
         addButton(
                 buttonPanel,
                 "ANS",
-                e -> {
-                    // Reserved for future feature
-                }
+                e -> answer()
         );
 
         addButton(
@@ -590,38 +458,28 @@ public class Calculator {
                 e -> frame.dispose()
         );
 
-
-        frame.add(
+        mainPanel.add(
                 buttonPanel,
-                BorderLayout.SOUTH
+                BorderLayout.CENTER
         );
 
-
-        // =================================================
-        // SHOW
-        // =================================================
-
-        frame.setVisible(
-                true
+        // ADD MAIN PANEL
+        frame.add(
+                mainPanel,
+                BorderLayout.CENTER
         );
+
+        frame.setVisible(true);
     }
 
-
-    // =====================================================
     // CREATE BUTTON
-    // =====================================================
-
     private void addButton(
             JPanel panel,
             String text,
             java.awt.event.ActionListener action
     ) {
 
-        JButton button =
-                new JButton(
-                        text
-                );
-
+        JButton button = new JButton(text);
 
         button.setFont(
                 new Font(
@@ -631,21 +489,11 @@ public class Calculator {
                 )
         );
 
+        button.setForeground(WHITE);
 
-        button.setForeground(
-                WHITE
-        );
+        button.setBackground(BUTTON);
 
-
-        button.setBackground(
-                BUTTON
-        );
-
-
-        button.setFocusPainted(
-                false
-        );
-
+        button.setFocusPainted(false);
 
         button.setCursor(
                 new Cursor(
@@ -653,26 +501,12 @@ public class Calculator {
                 )
         );
 
-
-        // IMPORTANT:
-        // Border thickness NEVER changes.
-        // This prevents the buttons from shaking.
-
         button.setBorder(
                 BorderFactory.createLineBorder(
-                        new Color(
-                                35,
-                                70,
-                                95
-                        ),
+                        new Color(35, 70, 95),
                         1
                 )
         );
-
-
-        // =================================================
-        // HOVER EFFECT
-        // =================================================
 
         button.addMouseListener(
                 new MouseAdapter() {
@@ -693,11 +527,7 @@ public class Calculator {
                         button.setForeground(
                                 Color.WHITE
                         );
-
-                        // Same 1px border!
-                        // No size change.
                     }
-
 
                     @Override
                     public void mouseExited(
@@ -715,31 +545,17 @@ public class Calculator {
                 }
         );
 
+        button.addActionListener(action);
 
-        button.addActionListener(
-                action
-        );
-
-
-        panel.add(
-                button
-        );
+        panel.add(button);
     }
 
-
-    // =====================================================
     // NUMBER
-    // =====================================================
-
-    private void number(
-            String value
-    ) {
+    private void number(String value) {
 
         if (newNumber) {
 
-            display.setText(
-                    value
-            );
+            display.setText(value);
 
             newNumber = false;
 
@@ -751,18 +567,12 @@ public class Calculator {
         }
     }
 
-
-    // =====================================================
     // DECIMAL
-    // =====================================================
-
     private void decimal() {
 
         if (newNumber) {
 
-            display.setText(
-                    "0."
-            );
+            display.setText("0.");
 
             newNumber = false;
 
@@ -776,14 +586,8 @@ public class Calculator {
         }
     }
 
-
-    // =====================================================
     // OPERATOR
-    // =====================================================
-
-    private void setOperator(
-            String op
-    ) {
+    private void setOperator(String op) {
 
         try {
 
@@ -792,34 +596,24 @@ public class Calculator {
                             display.getText()
                     );
 
-            operator =
-                    op;
+            operator = op;
 
-            // SHOW THE EXPRESSION
             expressionLabel.setText(
                     formatResult(firstNumber)
-                    + " "
-                    + getOperatorSymbol(op)
+                            + " "
+                            + getOperatorSymbol(op)
             );
 
             newNumber = true;
 
         } catch (Exception e) {
 
-            display.setText(
-                    "ERROR"
-            );
+            display.setText("ERROR");
         }
     }
 
-
-    // =====================================================
     // OPERATOR SYMBOL
-    // =====================================================
-
-    private String getOperatorSymbol(
-            String op
-    ) {
+    private String getOperatorSymbol(String op) {
 
         switch (op) {
 
@@ -840,23 +634,21 @@ public class Calculator {
         }
     }
 
-
-    // =====================================================
     // CALCULATE
-    // =====================================================
-
     private void calculate() {
 
         try {
+
+            if (operator.isEmpty()) {
+                return;
+            }
 
             double secondNumber =
                     Double.parseDouble(
                             display.getText()
                     );
 
-
             double result;
-
 
             switch (operator) {
 
@@ -864,28 +656,25 @@ public class Calculator {
 
                     result =
                             firstNumber
-                            + secondNumber;
+                                    + secondNumber;
 
                     break;
-
 
                 case "-":
 
                     result =
                             firstNumber
-                            - secondNumber;
+                                    - secondNumber;
 
                     break;
-
 
                 case "*":
 
                     result =
                             firstNumber
-                            * secondNumber;
+                                    * secondNumber;
 
                     break;
-
 
                 case "/":
 
@@ -900,64 +689,58 @@ public class Calculator {
 
                     result =
                             firstNumber
-                            / secondNumber;
+                                    / secondNumber;
 
                     break;
-
 
                 default:
 
                     return;
             }
 
-
-            // SHOW COMPLETE EXPRESSION
-
             expressionLabel.setText(
                     formatResult(firstNumber)
-                    + " "
-                    + getOperatorSymbol(operator)
-                    + " "
-                    + formatResult(secondNumber)
+                            + " "
+                            + getOperatorSymbol(operator)
+                            + " "
+                            + formatResult(secondNumber)
             );
-
-
-            // SHOW RESULT
 
             display.setText(
                     formatResult(result)
             );
 
+            // Save result for ANS
+            lastAnswer = result;
 
             newNumber = true;
 
             operator = "";
 
-
         } catch (Exception e) {
 
-            display.setText(
-                    "ERROR"
-            );
+            display.setText("ERROR");
 
             newNumber = true;
         }
     }
 
-
-    // =====================================================
-    // CLEAR
-    // =====================================================
-
-    private void clear() {
+    // ANSWER
+    private void answer() {
 
         display.setText(
-                "0"
+                formatResult(lastAnswer)
         );
 
-        expressionLabel.setText(
-                " "
-        );
+        newNumber = true;
+    }
+
+    // CLEAR
+    private void clear() {
+
+        display.setText("0");
+
+        expressionLabel.setText(" ");
 
         firstNumber = 0;
 
@@ -966,25 +749,21 @@ public class Calculator {
         newNumber = true;
     }
 
-
-    // =====================================================
     // BACKSPACE
-    // =====================================================
-
     private void backspace() {
 
         String text =
                 display.getText();
 
-
         if (
                 text.length() <= 1
-                || text.equals("ERROR")
+                        || text.equals("ERROR")
+                        || text.equals("INVALID")
+                        || text.equals("UNDEFINED")
+                        || text.equals("DIVIDE BY ZERO")
         ) {
 
-            display.setText(
-                    "0"
-            );
+            display.setText("0");
 
             newNumber = true;
 
@@ -999,11 +778,7 @@ public class Calculator {
         }
     }
 
-
-    // =====================================================
     // PERCENTAGE
-    // =====================================================
-
     private void percentage() {
 
         try {
@@ -1013,31 +788,24 @@ public class Calculator {
                             display.getText()
                     );
 
-            value =
+            double result =
                     value / 100;
 
-
             display.setText(
-                    formatResult(value)
+                    formatResult(result)
             );
 
+            lastAnswer = result;
 
             newNumber = true;
 
-
         } catch (Exception e) {
 
-            display.setText(
-                    "ERROR"
-            );
+            display.setText("ERROR");
         }
     }
 
-
-    // =====================================================
     // SQUARE ROOT
-    // =====================================================
-
     private void squareRoot() {
 
         try {
@@ -1047,40 +815,31 @@ public class Calculator {
                             display.getText()
                     );
 
-
             if (value < 0) {
 
-                display.setText(
-                        "INVALID"
-                );
+                display.setText("INVALID");
 
                 return;
             }
 
+            double result =
+                    Math.sqrt(value);
 
             display.setText(
-                    formatResult(
-                            Math.sqrt(value)
-                    )
+                    formatResult(result)
             );
 
+            lastAnswer = result;
 
             newNumber = true;
 
-
         } catch (Exception e) {
 
-            display.setText(
-                    "ERROR"
-            );
+            display.setText("ERROR");
         }
     }
 
-
-    // =====================================================
     // SQUARE
-    // =====================================================
-
     private void square() {
 
         try {
@@ -1090,30 +849,24 @@ public class Calculator {
                             display.getText()
                     );
 
+            double result =
+                    value * value;
 
             display.setText(
-                    formatResult(
-                            value * value
-                    )
+                    formatResult(result)
             );
 
+            lastAnswer = result;
 
             newNumber = true;
 
-
         } catch (Exception e) {
 
-            display.setText(
-                    "ERROR"
-            );
+            display.setText("ERROR");
         }
     }
 
-
-    // =====================================================
     // RECIPROCAL
-    // =====================================================
-
     private void reciprocal() {
 
         try {
@@ -1123,40 +876,31 @@ public class Calculator {
                             display.getText()
                     );
 
-
             if (value == 0) {
 
-                display.setText(
-                        "INVALID"
-                );
+                display.setText("INVALID");
 
                 return;
             }
 
+            double result =
+                    1 / value;
 
             display.setText(
-                    formatResult(
-                            1 / value
-                    )
+                    formatResult(result)
             );
 
+            lastAnswer = result;
 
             newNumber = true;
 
-
         } catch (Exception e) {
 
-            display.setText(
-                    "ERROR"
-            );
+            display.setText("ERROR");
         }
     }
 
-
-    // =====================================================
     // TRIGONOMETRY
-    // =====================================================
-
     private void trigonometric(
             String function
     ) {
@@ -1168,77 +912,68 @@ public class Calculator {
                             display.getText()
                     );
 
-
             double radians =
-                    Math.toRadians(
-                            value
-                    );
-
+                    Math.toRadians(value);
 
             double result;
-
 
             switch (function) {
 
                 case "sin":
 
                     result =
-                            Math.sin(
-                                    radians
-                            );
+                            Math.sin(radians);
 
                     break;
-
 
                 case "cos":
 
                     result =
-                            Math.cos(
-                                    radians
-                            );
+                            Math.cos(radians);
 
                     break;
-
 
                 case "tan":
 
+                    double cosValue =
+                            Math.cos(radians);
+
+                    if (
+                            Math.abs(cosValue) < 1E-10
+                    ) {
+
+                        display.setText(
+                                "UNDEFINED"
+                        );
+
+                        return;
+                    }
+
                     result =
-                            Math.tan(
-                                    radians
-                            );
+                            Math.tan(radians);
 
                     break;
-
 
                 default:
 
                     return;
             }
 
-
             display.setText(
-                    formatResult(
-                            result
-                    )
+                    formatResult(result)
             );
 
+            lastAnswer = result;
 
             newNumber = true;
 
-
         } catch (Exception e) {
 
-            display.setText(
-                    "ERROR"
-            );
+            display.setText("ERROR");
         }
     }
 
-
-    // =====================================================
     // LOG
-    // =====================================================
-
     private void logarithm() {
 
         try {
@@ -1248,40 +983,31 @@ public class Calculator {
                             display.getText()
                     );
 
-
             if (value <= 0) {
 
-                display.setText(
-                        "INVALID"
-                );
+                display.setText("INVALID");
 
                 return;
             }
 
+            double result =
+                    Math.log10(value);
 
             display.setText(
-                    formatResult(
-                            Math.log10(value)
-                    )
+                    formatResult(result)
             );
 
+            lastAnswer = result;
 
             newNumber = true;
 
-
         } catch (Exception e) {
 
-            display.setText(
-                    "ERROR"
-            );
+            display.setText("ERROR");
         }
     }
 
-
-    // =====================================================
     // NATURAL LOG
-    // =====================================================
-
     private void naturalLog() {
 
         try {
@@ -1291,40 +1017,31 @@ public class Calculator {
                             display.getText()
                     );
 
-
             if (value <= 0) {
 
-                display.setText(
-                        "INVALID"
-                );
+                display.setText("INVALID");
 
                 return;
             }
 
+            double result =
+                    Math.log(value);
 
             display.setText(
-                    formatResult(
-                            Math.log(value)
-                    )
+                    formatResult(result)
             );
 
+            lastAnswer = result;
 
             newNumber = true;
 
-
         } catch (Exception e) {
 
-            display.setText(
-                    "ERROR"
-            );
+            display.setText("ERROR");
         }
     }
 
-
-    // =====================================================
     // PI
-    // =====================================================
-
     private void pi() {
 
         display.setText(
@@ -1336,11 +1053,7 @@ public class Calculator {
         newNumber = true;
     }
 
-
-    // =====================================================
     // E
-    // =====================================================
-
     private void eConstant() {
 
         display.setText(
@@ -1352,11 +1065,7 @@ public class Calculator {
         newNumber = true;
     }
 
-
-    // =====================================================
     // CHANGE SIGN
-    // =====================================================
-
     private void changeSign() {
 
         try {
@@ -1366,33 +1075,30 @@ public class Calculator {
                             display.getText()
                     );
 
-
             value = -value;
 
-
             display.setText(
-                    formatResult(
-                            value
-                    )
+                    formatResult(value)
             );
-
 
         } catch (Exception e) {
 
-            display.setText(
-                    "ERROR"
-            );
+            display.setText("ERROR");
         }
     }
 
-
-    // =====================================================
     // FORMAT RESULT
-    // =====================================================
-
     private String formatResult(
             double value
     ) {
+
+        if (
+                Double.isNaN(value)
+                        || Double.isInfinite(value)
+        ) {
+
+            return "ERROR";
+        }
 
         if (
                 value == (long) value
@@ -1405,9 +1111,7 @@ public class Calculator {
 
         } else {
 
-            return String.valueOf(
-                    value
-            );
+            return String.valueOf(value);
         }
     }
 }
